@@ -31,19 +31,19 @@
         android:layout_width="409dp"
         android:layout_height="3dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="32dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="#0A0A0A"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/c4" />
+        app:layout_constraintTop_toBottomOf="@+id/c5" />
 
     <ImageView
         android:id="@+id/c2"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:visibility="invisible"
+        android:layout_marginTop="9dp"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/c1"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:srcCompat="@drawable/dice_1" />
@@ -53,10 +53,10 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="105dp"
-        android:layout_marginTop="36dp"
-        android:visibility="invisible"
+        android:layout_marginTop="35dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/c2"
+        app:layout_constraintTop_toBottomOf="@+id/c1"
         app:srcCompat="@drawable/dice_1" />
 
     <ImageView
@@ -64,10 +64,10 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="72dp"
-        android:visibility="invisible"
+        android:layout_marginTop="58dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/targetscore"
         app:srcCompat="@drawable/dice_1" />
 
     <ImageView
@@ -75,8 +75,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="45dp"
-        android:visibility="invisible"
+        android:layout_marginTop="56dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         app:srcCompat="@drawable/dice_1" />
@@ -87,7 +87,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="105dp"
         android:layout_marginTop="36dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/u1"
         app:srcCompat="@drawable/dice_1" />
@@ -98,7 +98,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="36dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/u4"
         app:layout_constraintTop_toBottomOf="@+id/u2"
         app:srcCompat="@drawable/dice_1" />
@@ -108,10 +108,10 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="4dp"
-        android:visibility="invisible"
+        android:layout_marginTop="9dp"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/u1"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/user"
         app:srcCompat="@drawable/dice_1" />
 
     <ImageView
@@ -119,8 +119,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="45dp"
-        android:visibility="invisible"
+        android:layout_marginTop="56dp"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/u2"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         app:srcCompat="@drawable/dice_1" />
@@ -131,7 +131,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="35dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/c4"
         app:layout_constraintTop_toBottomOf="@+id/c3"
         app:srcCompat="@drawable/dice_1" />
@@ -140,9 +140,9 @@
         android:id="@+id/c3"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="46dp"
         android:layout_marginTop="58dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/c2"
         app:layout_constraintTop_toBottomOf="@+id/user_score"
         app:srcCompat="@drawable/dice_1" />
@@ -151,48 +151,62 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="62dp"
-        android:text="Round :"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="40dp"
+        android:text="Round"
         android:textColor="#0D0D0D"
-        android:textSize="26sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/round"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="11dp"
         android:text="00"
         android:textColor="#151515"
-        android:textSize="26sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/targetscore"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="40dp"
         android:text="Score"
         android:textColor="#0B0B0B"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/round"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="65dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="26dp"
+        android:text="Target Score"
+        android:textAlignment="center"
+        android:textColor="#0B0B0B"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/user_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="12dp"
-        android:text="000"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="13dp"
+        android:text="0"
         android:textColor="#0B35F6"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -203,9 +217,9 @@
         android:id="@+id/computer_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="126dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="12dp"
-        android:text="000"
+        android:text="0"
         android:textColor="#F80808"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -216,8 +230,8 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
         android:text="|"
         android:textColor="#0E0E0E"
         android:textSize="22dp"
@@ -230,7 +244,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="17dp"
         android:text="Computer"
         android:textColor="#F60707"
         android:textSize="24sp"
@@ -239,16 +253,29 @@
         app:layout_constraintTop_toBottomOf="@+id/round" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="181dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="15dp"
         android:text="User"
         android:textColor="#056FEF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/targetscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
+        android:text="000"
+        android:textColor="#F30707"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

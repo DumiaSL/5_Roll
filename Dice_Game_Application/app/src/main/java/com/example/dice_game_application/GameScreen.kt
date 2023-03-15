@@ -1,6 +1,7 @@
 package com.example.dice_game_application
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,12 +17,17 @@ class GameScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
 
-        var win_mark=101
+        val win_mark=intent.getIntExtra("win_mark",101)
+        val user_name= intent.getStringExtra("user_name")
+
+        println(win_mark)
+        println(user_name)
 
         var user_list = mutableListOf<Int>()
         var computer_list = mutableListOf<Int>()
 
         val playbutton : Button = findViewById(R.id.throwbtn)
+        val score : Button = findViewById(R.id.score)
         val c_image1 : ImageView = findViewById(R.id.c1)
         val c_image2 : ImageView = findViewById(R.id.c2)
         val c_image3 : ImageView = findViewById(R.id.c3)
@@ -35,7 +41,9 @@ class GameScreen : AppCompatActivity() {
         val computer_Score_text : TextView = findViewById(R.id.computer_score)
         val User_Score_text : TextView = findViewById(R.id.user_score)
         val round_text : TextView = findViewById(R.id.round)
-        val score : Button = findViewById(R.id.score)
+        val target_text : TextView = findViewById(R.id.targetscore)
+        val user_text : TextView = findViewById(R.id.user)
+
 
         var computerscore=0
         var userscore=0
@@ -45,18 +53,23 @@ class GameScreen : AppCompatActivity() {
 
         val mydialog= Dialog(this)
 
+        target_text.setText(win_mark.toString())
+        round_text.setText(rounds.toString())
+        user_text.setText(user_name)
+
+
         score.setOnClickListener{
 
             if (userscore>=101){
-                win_part(mydialog)
+                result_part(mydialog,"You Win !",Color.GREEN)
             } else if (computerscore>=101){
-                lost_part(mydialog)
+                result_part(mydialog,"You Lost !",Color.RED)
             }
 
             playbutton.setText("Throw")
 
             rounds++
-            round_text.setText("Rounds "+rounds.toString())
+            round_text.setText(rounds.toString())
 
             for (i in 0..4) {
                 computerscore += computer_list[i]
@@ -138,9 +151,9 @@ class GameScreen : AppCompatActivity() {
                 u_image5.isClickable=false
 
                 if (userscore>=101){
-                    win_part(mydialog)
+                    result_part(mydialog, "You Win !", Color.GREEN)
                 } else if (computerscore>=101){
-                    lost_part(mydialog)
+                    result_part(mydialog,"You Lost !",Color.RED)
                 }
             }
 
@@ -213,26 +226,15 @@ class GameScreen : AppCompatActivity() {
         }
     }
 
-    private fun lost_part(mydialog: Dialog) {
+    private fun result_part(mydialog: Dialog, resultType: String, colour: Int) {
         mydialog.setContentView(R.layout.activity_result_screen)
         val body = mydialog.findViewById(R.id.result) as TextView
-        body.text = "You Lost !"
-        body.setTextColor(Color.RED)
-        mydialog.setOnCancelListener {
-            finish()
-        }
-        mydialog.setCanceledOnTouchOutside(false)
-        mydialog.show()
-    }
-
-    private fun win_part(mydialog: Dialog) {
-        mydialog.setContentView(R.layout.activity_result_screen)
-        val body = mydialog.findViewById(R.id.result) as TextView
-        body.text = "You Win !"
-        body.setTextColor(Color.GREEN)
+        body.text = resultType
+        body.setTextColor(colour)
         mydialog.setCanceledOnTouchOutside(false)
         mydialog.setOnCancelListener {
-            finish()
+            val intent = Intent(this, ChosenPage::class.java)
+            startActivity(intent)
         }
         mydialog.show()
     }
