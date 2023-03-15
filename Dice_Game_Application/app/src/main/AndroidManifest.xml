@@ -12,6 +12,12 @@
         android:theme="@style/Theme.Dice_Game_Application"
         tools:targetApi="31">
         <activity
+            android:name=".Game_Inputs_rules"
+            android:exported="false" />
+        <activity
+            android:name=".ResultScreen"
+            android:exported="false" />
+        <activity
             android:name=".GameScreen"
             android:exported="false" />
         <activity

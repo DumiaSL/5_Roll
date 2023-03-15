@@ -1,5 +1,6 @@
 package com.example.dice_game_application
 
+import android.app.Dialog
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,8 @@ class GameScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
+
+        var win_mark=101
 
         var user_list = mutableListOf<Int>()
         var computer_list = mutableListOf<Int>()
@@ -40,7 +43,15 @@ class GameScreen : AppCompatActivity() {
 
         var remove_list = mutableListOf<Boolean>(false,false,false,false,false)
 
+        val mydialog= Dialog(this)
+
         score.setOnClickListener{
+
+            if (userscore>=101){
+                win_part(mydialog)
+            } else if (computerscore>=101){
+                lost_part(mydialog)
+            }
 
             playbutton.setText("Throw")
 
@@ -97,6 +108,7 @@ class GameScreen : AppCompatActivity() {
                 }
 
             }else{
+
                 playbutton.setText("Throw")
 
                 for (i in 0 until 4) { // add 6 random numbers to the list
@@ -113,6 +125,7 @@ class GameScreen : AppCompatActivity() {
                     userscore += user_list[i]
                 }
 
+
                 computer_Score_text.setText(computerscore.toString())
                 User_Score_text.setText(userscore.toString())
 
@@ -123,6 +136,12 @@ class GameScreen : AppCompatActivity() {
                 u_image3.isClickable=false
                 u_image4.isClickable=false
                 u_image5.isClickable=false
+
+                if (userscore>=101){
+                    win_part(mydialog)
+                } else if (computerscore>=101){
+                    lost_part(mydialog)
+                }
             }
 
             setImage(c_image1,computer_list[0])
@@ -194,6 +213,30 @@ class GameScreen : AppCompatActivity() {
         }
     }
 
+    private fun lost_part(mydialog: Dialog) {
+        mydialog.setContentView(R.layout.activity_result_screen)
+        val body = mydialog.findViewById(R.id.result) as TextView
+        body.text = "You Lost !"
+        body.setTextColor(Color.RED)
+        mydialog.setOnCancelListener {
+            finish()
+        }
+        mydialog.setCanceledOnTouchOutside(false)
+        mydialog.show()
+    }
+
+    private fun win_part(mydialog: Dialog) {
+        mydialog.setContentView(R.layout.activity_result_screen)
+        val body = mydialog.findViewById(R.id.result) as TextView
+        body.text = "You Win !"
+        body.setTextColor(Color.GREEN)
+        mydialog.setCanceledOnTouchOutside(false)
+        mydialog.setOnCancelListener {
+            finish()
+        }
+        mydialog.show()
+    }
+
     fun genarate_numbers(): MutableList<Int> {
         val list = mutableListOf<Int>()
 
@@ -220,7 +263,6 @@ class GameScreen : AppCompatActivity() {
         }else{
             image.setImageResource(R.drawable.six)
         }
-
     }
 
 }
