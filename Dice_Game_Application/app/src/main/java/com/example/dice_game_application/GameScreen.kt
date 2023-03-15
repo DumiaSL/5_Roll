@@ -39,7 +39,7 @@ class GameScreen : AppCompatActivity() {
 
         var computerscore=0
         var userscore=0
-        var rounds=0
+        var rounds=1
 
         var remove_list = mutableListOf<Boolean>(false,false,false,false,false)
 
@@ -118,7 +118,7 @@ class GameScreen : AppCompatActivity() {
                 }
 
                 rounds++
-                round_text.setText("Rounds "+rounds.toString())
+                round_text.setText(rounds.toString())
 
                 for (i in 0..4) {
                     computerscore += computer_list[i]
@@ -251,17 +251,17 @@ class GameScreen : AppCompatActivity() {
     fun setImage(image: ImageView, i: Int) {
         image.isVisible=true
         if (i==1){
-            image.setImageResource(R.drawable.one)
+            image.setImageResource(R.drawable.dice_1)
         }else if (i==2){
-            image.setImageResource(R.drawable.two)
+            image.setImageResource(R.drawable.dice_2)
         }else if (i==3){
-            image.setImageResource(R.drawable.three)
+            image.setImageResource(R.drawable.dice_3)
         }else if (i==4){
-            image.setImageResource(R.drawable.four)
+            image.setImageResource(R.drawable.dice_4)
         }else if (i==5){
-            image.setImageResource(R.drawable.five)
+            image.setImageResource(R.drawable.dice_5)
         }else{
-            image.setImageResource(R.drawable.six)
+            image.setImageResource(R.drawable.dice_6)
         }
     }
 
