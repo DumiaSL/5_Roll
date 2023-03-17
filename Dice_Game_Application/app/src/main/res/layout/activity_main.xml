@@ -4,32 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="243dp"
-        android:layout_height="314dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="96dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dicelogo" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="349dp"
         android:layout_height="50dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:indeterminate="false"
         android:max="100"
         android:minWidth="200dp"
         android:minHeight="50dp"
         android:progress="1"
-        android:progressBackgroundTint="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:progressBackgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -37,9 +27,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="142dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="514dp"
         android:text="Loading"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,13 +40,13 @@
         android:id="@+id/round"
         android:layout_width="212dp"
         android:layout_height="65dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="80dp"
         android:text="5 - Roll"
         android:textAlignment="center"
-        android:textColor="#ABB552"
+        android:textColor="#C3C7E8"
         android:textSize="44sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

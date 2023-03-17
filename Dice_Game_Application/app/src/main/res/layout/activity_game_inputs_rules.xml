@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="400dp"
+    android:layout_height="450dp"
     android:layout_gravity="center"
+    android:background="#E5D1FA"
     tools:context=".Game_Inputs_rules">
 
     <TextView
@@ -28,6 +29,7 @@
         android:layout_marginTop="11dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +52,7 @@
         android:layout_marginTop="17dp"
         android:text="User Name"
         android:textColor="#0B0A0A"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -65,7 +67,7 @@
         android:layout_marginTop="21dp"
         android:text="Winner Target"
         android:textColor="#0B0A0A"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_field" />
@@ -77,6 +79,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="number"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

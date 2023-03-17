@@ -45,8 +45,6 @@ class ChosenPage : AppCompatActivity() {
                 }else{
                     check_text.isVisible=true
                 }
-
-
             }
             mydialog.show()
         }

@@ -1,231 +1,230 @@
 package com.example.dice_game_application
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+
 
 class GameScreen : AppCompatActivity() {
     val random = java.util.Random()
+    var mydialog: Dialog? = null
+
+    //
+    var user_list = mutableListOf<Int>()
+    var computer_list = mutableListOf<Int>()
+
+    //
+    var remove_list = mutableListOf(false,false,false,false,false)
+
+    //
+    var computerscore=0
+    var userscore=0
+    var rounds=1
+    var isTie=false
+
+    //
+    var userDiceFaces: MutableList<ImageView>? = null
+    var computerDiceFaces: MutableList<ImageView>? = null
+
+    //
+    var win_mark=0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
 
-        val win_mark=intent.getIntExtra("win_mark",101)
+        mydialog= Dialog(this)
+
+        //
+        win_mark=intent.getIntExtra("win_mark",101)
         val user_name= intent.getStringExtra("user_name")
 
-        println(win_mark)
-        println(user_name)
-
-        var user_list = mutableListOf<Int>()
-        var computer_list = mutableListOf<Int>()
-
-        val playbutton : Button = findViewById(R.id.throwbtn)
+        //connecting screen item with backend code
+        val throwButton : Button = findViewById(R.id.throwbtn)
         val score : Button = findViewById(R.id.score)
-        val c_image1 : ImageView = findViewById(R.id.c1)
-        val c_image2 : ImageView = findViewById(R.id.c2)
-        val c_image3 : ImageView = findViewById(R.id.c3)
-        val c_image4 : ImageView = findViewById(R.id.c4)
-        val c_image5 : ImageView = findViewById(R.id.c5)
-        val u_image1 : ImageView = findViewById(R.id.u1)
-        val u_image2 : ImageView = findViewById(R.id.u2)
-        val u_image3 : ImageView = findViewById(R.id.u3)
-        val u_image4 : ImageView = findViewById(R.id.u4)
-        val u_image5 : ImageView = findViewById(R.id.u5)
+        val c_image0 : ImageView = findViewById(R.id.c1)
+        val c_image1 : ImageView = findViewById(R.id.c2)
+        val c_image2 : ImageView = findViewById(R.id.c3)
+        val c_image3 : ImageView = findViewById(R.id.c4)
+        val c_image4 : ImageView = findViewById(R.id.c5)
+        val u_image0 : ImageView = findViewById(R.id.u1)
+        val u_image1 : ImageView = findViewById(R.id.u2)
+        val u_image2 : ImageView = findViewById(R.id.u3)
+        val u_image3 : ImageView = findViewById(R.id.u4)
+        val u_image4 : ImageView = findViewById(R.id.u5)
         val computer_Score_text : TextView = findViewById(R.id.computer_score)
         val User_Score_text : TextView = findViewById(R.id.user_score)
         val round_text : TextView = findViewById(R.id.round)
         val target_text : TextView = findViewById(R.id.targetscore)
         val user_text : TextView = findViewById(R.id.user)
 
+        //List of dice faces
+        userDiceFaces = mutableListOf(u_image0,u_image1,u_image2,u_image3,u_image4)
+        computerDiceFaces = mutableListOf(c_image0,c_image1,c_image2,c_image3,c_image4)
 
-        var computerscore=0
-        var userscore=0
-        var rounds=1
-
-        var remove_list = mutableListOf<Boolean>(false,false,false,false,false)
-
-        val mydialog= Dialog(this)
-
+        //initialize game screen
         target_text.setText(win_mark.toString())
         round_text.setText(rounds.toString())
         user_text.setText(user_name)
-
-
-        score.setOnClickListener{
-
-            if (userscore>=101){
-                result_part(mydialog,"You Win !",Color.GREEN)
-            } else if (computerscore>=101){
-                result_part(mydialog,"You Lost !",Color.RED)
+        //
+        for (imageIndex in 0 until 5){
+            userDiceFaces!![imageIndex].setOnClickListener {
+                remove_list[imageIndex]=selecImage(remove_list[imageIndex], userDiceFaces!![imageIndex])
             }
+        }
+        //user image set touch false
+        imageClickable(false)
+        //score button visibility off
+        score.isVisible=false
 
-            playbutton.setText("Throw")
 
+        //when press the Score button
+        score.setOnClickListener{
+//            result_part(mydialog,"You Win !",Color.GREEN)
+//            result_part(mydialog,"You Lost !",Color.RED)
+
+            throwButton.setText("Throw")
+            //Increment rounds
             rounds++
             round_text.setText(rounds.toString())
 
-            for (i in 0..4) {
-                computerscore += computer_list[i]
-                userscore += user_list[i]
-            }
+            //updating score
+            bothSideScoreUpdate()
 
+            //set score in screen
             computer_Score_text.setText(computerscore.toString())
             User_Score_text.setText(userscore.toString())
 
+            //score button visibility off
             score.isVisible=false
-            u_image1.setBackgroundColor(Color.WHITE)
-            u_image2.setBackgroundColor(Color.WHITE)
-            u_image3.setBackgroundColor(Color.WHITE)
-            u_image4.setBackgroundColor(Color.WHITE)
-            u_image5.setBackgroundColor(Color.WHITE)
 
-            u_image1.isClickable=false
-            u_image2.isClickable=false
-            u_image3.isClickable=false
-            u_image4.isClickable=false
-            u_image5.isClickable=false
+            //set user images transparent
+            imageTransparent()
 
-            remove_list = mutableListOf<Boolean>(false,false,false,false,false)
+            //user image set touch false
+            imageClickable(false)
+
+            // resetting the remove list
+            remove_list = mutableListOf(false,false,false,false,false)
+
+            //checking winning condition
+            winningCondition()
         }
 
-        playbutton.setOnClickListener {
+        //when press the Throw/Rethrow/Rethrow Again button
+        throwButton.setOnClickListener {
             score.isVisible=true
 
+            //Generating computer dice numbers
             computer_list=genarate_numbers()
 
-            if (playbutton.text=="Throw"){
-                playbutton.setText("Rethrow")
+            if (throwButton.text=="Throw"){
+                throwButton.setText("Rethrow")
 
+                //Generating user dice numbers
                 user_list=genarate_numbers()
 
-                u_image1.isClickable=true
-                u_image2.isClickable=true
-                u_image3.isClickable=true
-                u_image4.isClickable=true
-                u_image5.isClickable=true
+                //user image set touch true
+                imageClickable(true)
 
-            }else if (playbutton.text=="Rethrow"){
-                playbutton.setText("Rethrow again")
+            }else if (throwButton.text=="Rethrow"){
+                throwButton.setText("Rethrow again")
 
-                for (i in 0 until 4) { // add 6 random numbers to the list
-                    if (remove_list[i]==false){
-                        user_list[i]=random.nextInt(6) + 1
-                    }
-                }
+                //giving random numbers not selected dice
+                selectDiceUpdate()
 
             }else{
-
-                playbutton.setText("Throw")
-
-                for (i in 0 until 4) { // add 6 random numbers to the list
-                    if (remove_list[i]==false){
-                        user_list[i]=random.nextInt(6) + 1
-                    }
-                }
-
+                throwButton.setText("Throw")
+                //Increment rounds
                 rounds++
                 round_text.setText(rounds.toString())
 
-                for (i in 0..4) {
-                    computerscore += computer_list[i]
-                    userscore += user_list[i]
-                }
+                //giving random numbers not selected dice
+                selectDiceUpdate()
 
+                //updating score
+                bothSideScoreUpdate()
 
+                //set score in screen
                 computer_Score_text.setText(computerscore.toString())
                 User_Score_text.setText(userscore.toString())
 
+                //score button visibility off
                 score.isVisible=false
 
-                u_image1.isClickable=false
-                u_image2.isClickable=false
-                u_image3.isClickable=false
-                u_image4.isClickable=false
-                u_image5.isClickable=false
+                //user image set touch false
+                imageClickable(false)
 
-                if (userscore>=101){
-                    result_part(mydialog, "You Win !", Color.GREEN)
-                } else if (computerscore>=101){
-                    result_part(mydialog,"You Lost !",Color.RED)
-                }
+                //checking winning condition
+                winningCondition()
             }
 
-            setImage(c_image1,computer_list[0])
-            setImage(c_image2,computer_list[1])
-            setImage(c_image3,computer_list[2])
-            setImage(c_image4,computer_list[3])
-            setImage(c_image5,computer_list[4])
+            //set images in screen
+            for (diceIndex in 0..4) {
+                setImage(computerDiceFaces!![diceIndex],computer_list[diceIndex])
+                setImage(userDiceFaces!![diceIndex],user_list[diceIndex])
+            }
 
-            setImage(u_image1,user_list[0])
-            setImage(u_image2,user_list[1])
-            setImage(u_image3,user_list[2])
-            setImage(u_image4,user_list[3])
-            setImage(u_image5,user_list[4])
+            //set user images transparent
+            imageTransparent()
 
-            u_image1.setBackgroundColor(Color.WHITE)
-            u_image2.setBackgroundColor(Color.WHITE)
-            u_image3.setBackgroundColor(Color.WHITE)
-            u_image4.setBackgroundColor(Color.WHITE)
-            u_image5.setBackgroundColor(Color.WHITE)
-
+            // resetting the remove list
             remove_list = mutableListOf<Boolean>(false,false,false,false,false)
+        }
+    }
 
+    //
+    private fun imageTransparent() {
+        for (userImage in userDiceFaces!!){
+            userImage.setBackgroundColor(Color.TRANSPARENT)
         }
+    }
 
-        u_image1.setOnClickListener{
-            if (remove_list[0]==false){
-                u_image1.setBackgroundColor(getColor(R.color.purple_500))
-                remove_list[0]=true
-            }else{
-                u_image1.setBackgroundColor(Color.WHITE)
-                remove_list[0]=false
-            }
+    //
+    private fun imageClickable(touch_status: Boolean) {
+        for (image in userDiceFaces!!){
+            image.isClickable=touch_status
         }
-        u_image2.setOnClickListener{
-            if (remove_list[1]==false){
-                u_image2.setBackgroundColor(getColor(R.color.purple_500))
-                remove_list[1]=true
-            }else{
-                u_image2.setBackgroundColor(Color.WHITE)
-                remove_list[1]=false
-            }
+    }
+
+    //
+    private fun bothSideScoreUpdate() {
+        for (i in 0..4) {
+            computerscore += computer_list[i]
+            userscore += user_list[i]
         }
-        u_image3.setOnClickListener{
-            if (remove_list[2]==false){
-                u_image3.setBackgroundColor(getColor(R.color.purple_500))
-                remove_list[2]=true
-            }else{
-                u_image3.setBackgroundColor(Color.WHITE)
-                remove_list[2]=false
-            }
-        }
-        u_image4.setOnClickListener{
-            if (remove_list[3]==false){
-                u_image4.setBackgroundColor(getColor(R.color.purple_500))
-                remove_list[3]=true
-            }else{
-                u_image4.setBackgroundColor(Color.WHITE)
-                remove_list[3]=false
-            }
-        }
-        u_image5.setOnClickListener{
-            if (remove_list[4]==false){
-                u_image5.setBackgroundColor(getColor(R.color.purple_500))
-                remove_list[4]=true
-            }else{
-                u_image5.setBackgroundColor(Color.WHITE)
-                remove_list[4]=false
+    }
+
+    //giving random numbers not selected dice
+    private fun selectDiceUpdate() {
+        for (i in 0 until 5) {
+            if (remove_list[i]==false){
+                user_list[i]=random.nextInt(6) + 1
+                println(user_list[i])
             }
         }
     }
 
+    //
+    private fun selecImage(isImageSelect: Boolean, userImage: ImageView): Boolean {
+        if (isImageSelect==false){
+            userImage.setBackgroundColor(getColor(R.color.purple_500))
+            return true
+        }else{
+            userImage.setBackgroundColor(Color.TRANSPARENT)
+            return false
+        }
+    }
+
+    //
     private fun result_part(mydialog: Dialog, resultType: String, colour: Int) {
         mydialog.setContentView(R.layout.activity_result_screen)
         val body = mydialog.findViewById(R.id.result) as TextView
@@ -239,19 +238,19 @@ class GameScreen : AppCompatActivity() {
         mydialog.show()
     }
 
+    //Generating dice numbers
     fun genarate_numbers(): MutableList<Int> {
         val list = mutableListOf<Int>()
 
-        for (i in 1..5) { // add 6 random numbers to the list
-            val randomNumber = random.nextInt(6) + 1 // generate a random number between 1 and 6
+        for (i in 1..5) {
+            val randomNumber = random.nextInt(6) + 1
             list.add(randomNumber)
         }
         return  list
     }
 
-
+    //
     fun setImage(image: ImageView, i: Int) {
-        image.isVisible=true
         if (i==1){
             image.setImageResource(R.drawable.dice_1)
         }else if (i==2){
@@ -267,4 +266,61 @@ class GameScreen : AppCompatActivity() {
         }
     }
 
+    //game winning condition with relevant rules
+    private fun winningCondition() {
+//        userscore = 95
+//        computerscore=90
+//        win_mark=200
+//        if (userscore>=win_mark){
+//            if (userscore==computerscore){
+//                //tie
+//                isTie=true
+//            }else if (userscore>computerscore){
+//                mydialog?.let { result_part(it,"You Win !",Color.GREEN) }
+//            }else{
+//                mydialog?.let { result_part(it,"You Lost !",Color.RED) }
+//            }
+//        }else if (computerscore>=win_mark){
+//            if (userscore==computerscore){
+//                //tie
+//                isTie=true
+//            }else if (computerscore>userscore){
+//                mydialog?.let { result_part(it,"You Lost !",Color.RED) }
+//            }else{
+//                mydialog?.let { result_part(it,"You Win !",Color.GREEN) }
+//            }
+//        }
+
+        if (userscore >= win_mark || computerscore >= win_mark) {
+            if (userscore > computerscore) {
+                mydialog?.let { result_part(it, "You Win!", Color.GREEN) }
+            } else if (userscore < computerscore) {
+                mydialog?.let { result_part(it, "You Lost!", Color.RED) }
+            } else {
+                isTie = true
+                whenTheGameTie()
+            }
+        }
+    }
+
+    private fun whenTheGameTie() {
+
+    }
+
+    //in this activity customize backbutton
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure you want to exit?")
+        builder.setCancelable(false)
+        builder.setPositiveButton("Yes") { dialog, which ->
+            val intent = Intent(this, ChosenPage::class.java)
+            startActivity(intent)
+            finish()
+        }
+        builder.setNegativeButton("No") { dialog, which ->
+            // Do nothing
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
 }

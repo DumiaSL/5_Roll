@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ChosenPage::class.java)
             startActivity(intent)
             finish()
-        }, 2500)
+        }, 4500)
 
     }
 }
