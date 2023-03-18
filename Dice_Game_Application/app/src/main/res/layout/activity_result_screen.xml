@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="220dp"
-    android:layout_height="170dp"
+    android:layout_height="190dp"
     android:layout_gravity="center"
     tools:context=".ResultScreen">
 
@@ -22,5 +22,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.225" />
+
+    <TextView
+        android:id="@+id/resultuserwins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="23dp"
+        android:text="H:10"
+        android:textColor="#FA0808"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="25dp"
+        android:text="|"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/resultuserwins"
+        app:layout_constraintTop_toBottomOf="@+id/result" />
+
+    <TextView
+        android:id="@+id/resultcomwins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="23dp"
+        android:text="C:5"
+        android:textColor="#0943F4"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

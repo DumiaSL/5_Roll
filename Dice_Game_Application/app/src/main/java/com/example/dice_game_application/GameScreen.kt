@@ -13,7 +13,7 @@ import androidx.core.view.isVisible
 
 
 class GameScreen : AppCompatActivity() {
-    val random = java.util.Random()
+    private val random = java.util.Random()
     var mydialog: Dialog? = null
 
     //
@@ -35,6 +35,8 @@ class GameScreen : AppCompatActivity() {
 
     //
     var win_mark=0
+    var computerWins=0
+    var userWins=0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,35 +47,42 @@ class GameScreen : AppCompatActivity() {
 
         //
         win_mark=intent.getIntExtra("win_mark",101)
-        val user_name= intent.getStringExtra("user_name")
+        var user_name= intent.getStringExtra("user_name")
+        computerWins=intent.getIntExtra("ComputerWins",0)
+        userWins=intent.getIntExtra("UserWins",0)
 
         //connecting screen item with backend code
         val throwButton : Button = findViewById(R.id.throwbtn)
         val score : Button = findViewById(R.id.score)
-        val c_image0 : ImageView = findViewById(R.id.c1)
-        val c_image1 : ImageView = findViewById(R.id.c2)
-        val c_image2 : ImageView = findViewById(R.id.c3)
-        val c_image3 : ImageView = findViewById(R.id.c4)
-        val c_image4 : ImageView = findViewById(R.id.c5)
-        val u_image0 : ImageView = findViewById(R.id.u1)
-        val u_image1 : ImageView = findViewById(R.id.u2)
-        val u_image2 : ImageView = findViewById(R.id.u3)
-        val u_image3 : ImageView = findViewById(R.id.u4)
-        val u_image4 : ImageView = findViewById(R.id.u5)
+        val cImage0 : ImageView = findViewById(R.id.c1)
+        val cImage1 : ImageView = findViewById(R.id.c2)
+        val cImage2 : ImageView = findViewById(R.id.c3)
+        val cImage3 : ImageView = findViewById(R.id.c4)
+        val cImage4 : ImageView = findViewById(R.id.c5)
+        val uImage0 : ImageView = findViewById(R.id.u1)
+        val uImage1 : ImageView = findViewById(R.id.u2)
+        val uImage2 : ImageView = findViewById(R.id.u3)
+        val uImage3 : ImageView = findViewById(R.id.u4)
+        val uImage4 : ImageView = findViewById(R.id.u5)
         val computer_Score_text : TextView = findViewById(R.id.computer_score)
         val User_Score_text : TextView = findViewById(R.id.user_score)
         val round_text : TextView = findViewById(R.id.round)
         val target_text : TextView = findViewById(R.id.targetscore)
         val user_text : TextView = findViewById(R.id.user)
+        val winUser_text : TextView = findViewById(R.id.userwins)
+        val wincom_text : TextView = findViewById(R.id.computerwins)
 
         //List of dice faces
-        userDiceFaces = mutableListOf(u_image0,u_image1,u_image2,u_image3,u_image4)
-        computerDiceFaces = mutableListOf(c_image0,c_image1,c_image2,c_image3,c_image4)
+        userDiceFaces = mutableListOf(uImage0,uImage1,uImage2,uImage3,uImage4)
+        computerDiceFaces = mutableListOf(cImage0,cImage1,cImage2,cImage3,cImage4)
 
         //initialize game screen
         target_text.setText(win_mark.toString())
         round_text.setText(rounds.toString())
         user_text.setText(user_name)
+        winUser_text.setText(userWins.toString())
+        wincom_text.setText(computerWins.toString())
+
         //
         for (imageIndex in 0 until 5){
             userDiceFaces!![imageIndex].setOnClickListener {
@@ -121,19 +130,22 @@ class GameScreen : AppCompatActivity() {
 
         //when press the Throw/Rethrow/Rethrow Again button
         throwButton.setOnClickListener {
-            score.isVisible=true
+            if (!isTie){
+                score.isVisible=true
+            }
 
             //Generating computer dice numbers
             computer_list=genarate_numbers()
 
             if (throwButton.text=="Throw"){
-                throwButton.setText("Rethrow")
+                if (!isTie){
+                    throwButton.setText("Rethrow")
+                    //user image set touch true
+                    imageClickable(true)
+                }
 
                 //Generating user dice numbers
                 user_list=genarate_numbers()
-
-                //user image set touch true
-                imageClickable(true)
 
             }else if (throwButton.text=="Rethrow"){
                 throwButton.setText("Rethrow again")
@@ -163,6 +175,19 @@ class GameScreen : AppCompatActivity() {
                 //user image set touch false
                 imageClickable(false)
 
+                //checking winning condition
+                winningCondition()
+            }
+
+            if (isTie){
+                //Increment rounds
+                rounds++
+                round_text.setText(rounds.toString())
+                //updating score
+                bothSideScoreUpdate()
+                //set score in screen
+                computer_Score_text.setText(computerscore.toString())
+                User_Score_text.setText(userscore.toString())
                 //checking winning condition
                 winningCondition()
             }
@@ -208,7 +233,6 @@ class GameScreen : AppCompatActivity() {
         for (i in 0 until 5) {
             if (remove_list[i]==false){
                 user_list[i]=random.nextInt(6) + 1
-                println(user_list[i])
             }
         }
     }
@@ -228,11 +252,18 @@ class GameScreen : AppCompatActivity() {
     private fun result_part(mydialog: Dialog, resultType: String, colour: Int) {
         mydialog.setContentView(R.layout.activity_result_screen)
         val body = mydialog.findViewById(R.id.result) as TextView
+        val userwinsText = mydialog.findViewById(R.id.resultuserwins) as TextView
+        val comwinsText = mydialog.findViewById(R.id.resultcomwins) as TextView
         body.text = resultType
+        userwinsText.text="H:"+userWins.toString()
+        comwinsText.text="C:"+computerWins.toString()
         body.setTextColor(colour)
+
         mydialog.setCanceledOnTouchOutside(false)
         mydialog.setOnCancelListener {
             val intent = Intent(this, ChosenPage::class.java)
+            intent.putExtra("ComputerWins",computerWins)
+            intent.putExtra("UserWins",userWins)
             startActivity(intent)
         }
         mydialog.show()
@@ -268,34 +299,13 @@ class GameScreen : AppCompatActivity() {
 
     //game winning condition with relevant rules
     private fun winningCondition() {
-//        userscore = 95
-//        computerscore=90
-//        win_mark=200
-//        if (userscore>=win_mark){
-//            if (userscore==computerscore){
-//                //tie
-//                isTie=true
-//            }else if (userscore>computerscore){
-//                mydialog?.let { result_part(it,"You Win !",Color.GREEN) }
-//            }else{
-//                mydialog?.let { result_part(it,"You Lost !",Color.RED) }
-//            }
-//        }else if (computerscore>=win_mark){
-//            if (userscore==computerscore){
-//                //tie
-//                isTie=true
-//            }else if (computerscore>userscore){
-//                mydialog?.let { result_part(it,"You Lost !",Color.RED) }
-//            }else{
-//                mydialog?.let { result_part(it,"You Win !",Color.GREEN) }
-//            }
-//        }
-
         if (userscore >= win_mark || computerscore >= win_mark) {
             if (userscore > computerscore) {
+                userWins++
                 mydialog?.let { result_part(it, "You Win!", Color.GREEN) }
             } else if (userscore < computerscore) {
-                mydialog?.let { result_part(it, "You Lost!", Color.RED) }
+                computerWins++
+                mydialog?.let { result_part(it, "You Lost", Color.RED) }
             } else {
                 isTie = true
                 whenTheGameTie()
@@ -307,13 +317,15 @@ class GameScreen : AppCompatActivity() {
 
     }
 
-    //in this activity customize backbutton
+    //in this activity customize back button
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Are you sure you want to exit?")
         builder.setCancelable(false)
         builder.setPositiveButton("Yes") { dialog, which ->
             val intent = Intent(this, ChosenPage::class.java)
+            intent.putExtra("ComputerWins",computerWins)
+            intent.putExtra("UserWins",userWins)
             startActivity(intent)
             finish()
         }

@@ -11,7 +11,7 @@
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="161dp"
         android:layout_marginTop="16dp"
         android:text="Score"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:id="@+id/throwbtn"
         android:layout_width="169dp"
         android:layout_height="51dp"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="121dp"
         android:layout_marginTop="39dp"
         android:text="Throw"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,18 +32,18 @@
         android:layout_width="409dp"
         android:layout_height="3dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="3dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="#0A0A0A"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/c5" />
+        app:layout_constraintTop_toBottomOf="@+id/round" />
 
     <ImageView
         android:id="@+id/c2"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="12dp"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/c1"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
@@ -65,11 +65,11 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="66dp"
         android:clickable="true"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetscore"
+        app:layout_constraintTop_toBottomOf="@+id/userwins"
         app:srcCompat="@drawable/dice_1" />
 
     <ImageView
@@ -88,7 +88,7 @@
         android:id="@+id/u4"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="105dp"
+        android:layout_marginStart="106dp"
         android:layout_marginTop="36dp"
         android:clickable="false"
         android:visibility="visible"
@@ -110,10 +110,10 @@
 
     <ImageView
         android:id="@+id/u2"
-        android:layout_width="80dp"
+        android:layout_width="81dp"
         android:layout_height="80dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="11dp"
         android:clickable="false"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/u1"
@@ -134,9 +134,9 @@
 
     <ImageView
         android:id="@+id/c5"
-        android:layout_width="80dp"
+        android:layout_width="79dp"
         android:layout_height="80dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="41dp"
         android:layout_marginTop="35dp"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/c4"
@@ -148,7 +148,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="46dp"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="60dp"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/c2"
         app:layout_constraintTop_toBottomOf="@+id/user_score"
@@ -158,60 +158,58 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="63dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="141dp"
         android:text="Round"
         android:textColor="#0D0D0D"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c4" />
+
+    <TextView
+        android:id="@+id/round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:text="00"
+        android:textColor="#151515"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/c5" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="28dp"
+        android:text="Score"
+        android:textColor="#0B0B0B"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/round"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="11dp"
-        android:text="00"
-        android:textColor="#151515"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/targetscore"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="40dp"
-        android:text="Score"
-        android:textColor="#0B0B0B"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textView6"
         android:layout_width="65dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="26dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="16dp"
         android:text="Target Score"
         android:textAlignment="center"
         android:textColor="#0B0B0B"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/user_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="80dp"
         android:text="00"
         android:textColor="#0B35F6"
@@ -224,13 +222,13 @@
         android:id="@+id/computer_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="87dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="23dp"
         android:text="00"
         android:textColor="#F80808"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/round"
+        app:layout_constraintStart_toEndOf="@+id/targetscore"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
@@ -238,7 +236,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="23dp"
         android:text="|"
         android:textColor="#0E0E0E"
         android:textSize="22dp"
@@ -251,21 +249,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="18dp"
         android:text="Computer"
         android:textAllCaps="true"
         android:textColor="#F60707"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/round" />
+        app:layout_constraintTop_toBottomOf="@+id/targetscore" />
 
     <TextView
         android:id="@+id/user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="13dp"
         android:text="User"
         android:textAllCaps="true"
         android:textColor="#056FEF"
@@ -278,13 +276,65 @@
         android:id="@+id/targetscore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="9dp"
         android:text="000"
         android:textColor="#F30707"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/computerwins"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="Wiinnig Score"
+        android:textColor="#0C0C0C"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userwins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="H:10"
+        android:textColor="#021AEF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/computerwins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="20dp"
+        android:text="C:5"
+        android:textColor="#F10909"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="17dp"
+        android:text="|"
+        android:textColor="#070707"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/userwins"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
