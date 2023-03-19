@@ -26,7 +26,6 @@ class ChosenPage : AppCompatActivity() {
         var computerWins=intent.getIntExtra("ComputerWins",0)
         var userWins=intent.getIntExtra("UserWins",0)
 
-
         about.setOnClickListener {
             mydialog.setContentView(R.layout.activity_popup_profile)
             mydialog.show()
@@ -38,6 +37,11 @@ class ChosenPage : AppCompatActivity() {
             val target_mark = mydialog.findViewById(R.id.target_field) as EditText
             val user_name = mydialog.findViewById(R.id.name_field) as EditText
             val check_text = mydialog.findViewById(R.id.check) as TextView
+
+            //
+            user_name.setText("User")
+
+            target_mark.setText("101")
             startButton.setOnClickListener {
                 if ((target_mark.text.isNotEmpty()) && (user_name.text.isNotEmpty())){
                     val intent = Intent(this, GameScreen::class.java)
@@ -46,6 +50,7 @@ class ChosenPage : AppCompatActivity() {
                     intent.putExtra("ComputerWins",computerWins)
                     intent.putExtra("UserWins",userWins)
                     startActivity(intent)
+                    mydialog.dismiss()
                 }else{
                     check_text.isVisible=true
                 }
