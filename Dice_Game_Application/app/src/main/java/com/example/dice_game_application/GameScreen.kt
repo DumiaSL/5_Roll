@@ -32,7 +32,7 @@ class GameScreen : AppCompatActivity() {
     var userWins=0
     var isTie=false
     var throwRound=0
-    var isPopUp=false
+    var isWinPopUp: String? =null
 
     //
     var userDiceFaces: MutableList<ImageView>? = null
@@ -85,6 +85,7 @@ class GameScreen : AppCompatActivity() {
             userWins=savedInstanceState.getInt("userWins")
             isTie= savedInstanceState.getBoolean("isTie")
             throwRound=savedInstanceState.getInt("throwRound")
+            isWinPopUp=savedInstanceState.getString("isWinPopUp")
 
             user_list= savedInstanceState.getIntegerArrayList("user_list") as MutableList<Int>
             computer_list= savedInstanceState.getIntegerArrayList("computer_list") as MutableList<Int>
@@ -96,7 +97,6 @@ class GameScreen : AppCompatActivity() {
                     userRemoveList[index]=true
                 }
             }
-
         }
 
         //initialize game screen
@@ -273,7 +273,11 @@ class GameScreen : AppCompatActivity() {
             }
         }
 
-
+        if (isWinPopUp=="win"){
+            mydialog?.let { result_part(it, "You Win!", Color.GREEN) }
+        }else if (isWinPopUp=="lost"){
+            mydialog?.let { result_part(it, "You Lost", Color.RED) }
+        }
     }
 
     //The computer player follows a random strategy
@@ -383,9 +387,11 @@ class GameScreen : AppCompatActivity() {
     private fun winningCondition() {
         if (userscore >= win_mark || computerscore >= win_mark) {
             if (userscore > computerscore) {
+                isWinPopUp="win"
                 userWins++
                 mydialog?.let { result_part(it, "You Win!", Color.GREEN) }
             } else if (userscore < computerscore) {
+                isWinPopUp="lost"
                 computerWins++
                 mydialog?.let { result_part(it, "You Lost", Color.RED) }
             } else {
@@ -425,6 +431,7 @@ class GameScreen : AppCompatActivity() {
         outState.putIntegerArrayList("computer_list", ArrayList(computer_list))
 
         outState.putInt("throwRound", throwRound)
+        outState.putString("isWinPopUp", isWinPopUp)
 
         var tempRemoveList = mutableListOf<Int>()
         for (index in 0..4){
@@ -449,7 +456,7 @@ class GameScreen : AppCompatActivity() {
         computer_list= savedInstanceState.getIntegerArrayList("computer_list") as MutableList<Int>
         var tempRemoveList=savedInstanceState.getIntegerArrayList("tempRemoveList") as MutableList<Int>
         throwRound=savedInstanceState.getInt("throwRound")
-
+        isWinPopUp=savedInstanceState.getString("isWinPopUp")
 
         for (index in 0..4){
             if (tempRemoveList[index]==0){
@@ -461,5 +468,12 @@ class GameScreen : AppCompatActivity() {
 
         whenRotateSet()
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (mydialog != null && mydialog!!.isShowing()) {
+            mydialog!!.dismiss()
+        }
     }
 }
