@@ -1,5 +1,9 @@
 package com.example.dice_game_application
 
+//video video demonstration
+//https://drive.google.com/drive/folders/13inzG03KmsuN1HATlF15yapJW-uY9zVa?usp=sharing
+// 20200515_w1870557_DumiduFernando
+
 import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

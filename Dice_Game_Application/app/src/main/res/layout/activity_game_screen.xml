@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5D1FA"
+    android:background="@drawable/game"
     tools:context=".GameScreen">
 
     <Button
@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#09620D"
         android:text="Score"
+        app:cornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/throwbtn" />
 
@@ -23,7 +25,9 @@
         android:layout_height="51dp"
         android:layout_marginStart="121dp"
         android:layout_marginTop="39dp"
+        android:backgroundTint="#09620D"
         android:text="Throw"
+        app:cornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/u4" />
 

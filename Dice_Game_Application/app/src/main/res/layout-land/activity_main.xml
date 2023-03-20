@@ -4,49 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background2"
+    android:background="@drawable/splash"
     tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/round"
+        android:layout_width="212dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="60dp"
+        android:text="5 - Roll"
+        android:textAlignment="center"
+        android:textColor="#09620D"
+        android:textSize="44sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="154dp"
+        android:text="Loading"
+        android:textColor="#09620D"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/round" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="549dp"
+        android:layout_width="649dp"
         android:layout_height="50dp"
         android:indeterminate="false"
         android:max="100"
         android:minWidth="200dp"
         android:minHeight="50dp"
         android:progress="1"
-        android:progressBackgroundTint="@color/white"
+        android:progressBackgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="381dp"
-        android:layout_marginTop="170dp"
-        android:text="Loading"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/round" />
-
-    <TextView
-        android:id="@+id/round"
-        android:layout_width="212dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="52dp"
-        android:text="5 - Roll"
-        android:textAlignment="center"
-        android:textColor="#C3C7E8"
-        android:textSize="44sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

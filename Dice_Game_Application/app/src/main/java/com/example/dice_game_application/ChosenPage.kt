@@ -5,12 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.PopupWindow;
-import android.view.MotionEvent;
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.isVisible
 
 
@@ -20,6 +15,13 @@ class ChosenPage : AppCompatActivity() {
     var mydialog: Dialog? =null
     var isNewgamePopup=false
     var isAboutPopup=false
+    var level = false
+    lateinit var ishardswich: Switch
+//    lateinit var user_nameField: EditText
+//    lateinit var target_markField: EditText
+    var userName: String? =null
+    var targetMark=0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +39,7 @@ class ChosenPage : AppCompatActivity() {
             userWins = savedInstanceState.getInt("userWins")
             isNewgamePopup = savedInstanceState.getBoolean("isNewgamePopup")
             isAboutPopup = savedInstanceState.getBoolean("isAboutPopup")
-
+            level = savedInstanceState.getBoolean("level")
         }
 
         about.setOnClickListener {
@@ -53,23 +55,33 @@ class ChosenPage : AppCompatActivity() {
             mydialog!!.setContentView(R.layout.activity_game_inputs_rules)
             isNewgamePopup=true
             val startButton = mydialog!!.findViewById(R.id.start_button) as Button
-            val target_mark = mydialog!!.findViewById(R.id.target_field) as EditText
-            val user_name = mydialog!!.findViewById(R.id.name_field) as EditText
+            var target_markField = mydialog!!.findViewById(R.id.target_field) as EditText
+            var user_nameField = mydialog!!.findViewById(R.id.name_field) as EditText
             val check_text = mydialog!!.findViewById(R.id.check) as TextView
+            ishardswich = mydialog!!.findViewById(R.id.hardswich) as Switch
+
+            ishardswich?.setOnCheckedChangeListener { _, isChecked ->
+                level = isChecked
+            }
 
             //
-            user_name.setText("User")
+            user_nameField.setText("User")
             mydialog!!.setOnCancelListener{
                 isNewgamePopup=false
             }
-            target_mark.setText("101")
+
+            target_markField.setText("101")
             startButton.setOnClickListener {
-                if ((target_mark.text.isNotEmpty()) && (user_name.text.isNotEmpty())){
+                if ((target_markField.text.isNotEmpty()) && (user_nameField.text.isNotEmpty())){
+                    userName=user_nameField.text.toString()
+                    targetMark= target_markField.text.toString().toInt()
+
                     val intent = Intent(this, GameScreen::class.java)
-                    intent.putExtra("win_mark",target_mark.text.toString().toInt())
-                    intent.putExtra("user_name",user_name.text.toString())
+                    intent.putExtra("win_mark",targetMark)
+                    intent.putExtra("user_name",userName)
                     intent.putExtra("ComputerWins",computerWins)
                     intent.putExtra("UserWins",userWins)
+                    intent.putExtra("level",level)
                     startActivity(intent)
                     mydialog!!.dismiss()
                 }else{
@@ -79,7 +91,7 @@ class ChosenPage : AppCompatActivity() {
             mydialog!!.show()
         }
     }
-    
+
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Are you sure you want to exit?")
@@ -100,7 +112,12 @@ class ChosenPage : AppCompatActivity() {
         outState.putInt("userWins", userWins)
         outState.putBoolean("isNewgamePopup", isNewgamePopup)
         outState.putBoolean("isAboutPopup", isAboutPopup)
+        outState.putBoolean("level", level)
 
+//        userName= user_nameField.text.toString()
+//        targetMark= target_markField.text.toString().toInt()
+        outState.putInt("targetMark", targetMark)
+        outState.putString("userName", userName)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -109,46 +126,57 @@ class ChosenPage : AppCompatActivity() {
         userWins = savedInstanceState.getInt("userWins")
         isNewgamePopup = savedInstanceState.getBoolean("isNewgamePopup")
         isAboutPopup = savedInstanceState.getBoolean("isAboutPopup")
+        level = savedInstanceState.getBoolean("level")
+        targetMark = savedInstanceState.getInt("targetMark")
+        level = savedInstanceState.getBoolean("level")
 
         whenRotateSet()
     }
 
     private fun whenRotateSet() {
-        if (isAboutPopup){
-            isAboutPopup=true
-            mydialog!!.setContentView(R.layout.activity_popup_profile)
-            mydialog!!.setOnCancelListener{
-                isAboutPopup=false
-            }
-            mydialog!!.show()
-        }
-
         if (isNewgamePopup){
             mydialog!!.setContentView(R.layout.activity_game_inputs_rules)
             isNewgamePopup=true
             val startButton = mydialog!!.findViewById(R.id.start_button) as Button
-            val target_mark = mydialog!!.findViewById(R.id.target_field) as EditText
-            val user_name = mydialog!!.findViewById(R.id.name_field) as EditText
+            var target_markField = mydialog!!.findViewById(R.id.target_field) as EditText
+            var user_nameField = mydialog!!.findViewById(R.id.name_field) as EditText
             val check_text = mydialog!!.findViewById(R.id.check) as TextView
+            ishardswich = mydialog!!.findViewById(R.id.hardswich) as Switch
 
+            ishardswich?.setOnCheckedChangeListener { _, isChecked ->
+                level = isChecked
+            }
             //
-            user_name.setText("User")
+            user_nameField.setText("User")
             mydialog!!.setOnCancelListener{
                 isNewgamePopup=false
             }
-            target_mark.setText("101")
+            target_markField.setText("101")
             startButton.setOnClickListener {
-                if ((target_mark.text.isNotEmpty()) && (user_name.text.isNotEmpty())){
+                if ((target_markField.text.isNotEmpty()) && (user_nameField.text.isNotEmpty())){
+                    userName=user_nameField.text.toString()
+                    targetMark= target_markField.text.toString().toInt()
+
                     val intent = Intent(this, GameScreen::class.java)
-                    intent.putExtra("win_mark",target_mark.text.toString().toInt())
-                    intent.putExtra("user_name",user_name.text.toString())
+                    intent.putExtra("win_mark",targetMark)
+                    intent.putExtra("user_name",userName)
                     intent.putExtra("ComputerWins",computerWins)
                     intent.putExtra("UserWins",userWins)
+                    intent.putExtra("level",level)
                     startActivity(intent)
                     mydialog!!.dismiss()
                 }else{
                     check_text.isVisible=true
                 }
+            }
+            mydialog!!.show()
+        }
+
+        if (isAboutPopup){
+            isAboutPopup=true
+            mydialog!!.setContentView(R.layout.activity_popup_profile)
+            mydialog!!.setOnCancelListener{
+                isAboutPopup=false
             }
             mydialog!!.show()
         }

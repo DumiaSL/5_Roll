@@ -28,6 +28,7 @@ class GameScreen : AppCompatActivity() {
     var userscore=0
     var rounds=0
     var win_mark=101
+    var level=false
     var computerWins=0
     var userWins=0
     var isTie=false
@@ -58,6 +59,7 @@ class GameScreen : AppCompatActivity() {
         var user_name= intent.getStringExtra("user_name")
         computerWins=intent.getIntExtra("ComputerWins",0)
         userWins=intent.getIntExtra("UserWins",0)
+        level=intent.getBooleanExtra("level",false)
 
 
         //connecting screen item with backend code
@@ -116,14 +118,22 @@ class GameScreen : AppCompatActivity() {
         //score button visibility off
         score.isVisible=false
 
-
         //when press the Score button
         score.setOnClickListener{
-
-            randomComputer()
-            randomComputer()
+            //random strategy twice for computer
+            if (!level){
+                randomComputer()
+                randomComputer()
+            }else{
+                hardComputerPlayerStrategy()
+            }
 
             throwButton.setText("Throw")
+
+            //set images in screen
+            for (diceIndex in 0..4) {
+                setImage(computerDiceFaces!![diceIndex],computer_list[diceIndex])
+            }
 
             //updating score
             bothSideScoreUpdate()
@@ -183,8 +193,15 @@ class GameScreen : AppCompatActivity() {
 
             }else{
                 //random strategy twice for computer
-                randomComputer()
-                randomComputer()
+                if (!level){
+                    randomComputer()
+                    randomComputer()
+                    println("Ezy")
+                }else{
+                    hardComputerPlayerStrategy()
+                }
+
+                println(computer_list)
 
                 throwButton.setText("Throw")
                 throwRound=0
@@ -230,6 +247,68 @@ class GameScreen : AppCompatActivity() {
 
             // resetting the remove list
             userRemoveList = mutableListOf<Boolean>(false,false,false,false,false)
+        }
+    }
+
+    private fun hardComputerPlayerStrategy() {
+        var tempcomputerscore=computerscore
+        var gap = userscore - tempcomputerscore
+
+        //throw
+        if (gap > 20){
+            //high
+            //checking high values
+            for (count in  0 ..4){
+                var randomindex = random.nextInt(5)
+                if (computer_list[randomindex] <= 3){
+                    computer_list[randomindex]=random.nextInt(6) + 1
+                }
+            }
+        }else if(gap < 20){
+            randomComputer()
+            randomComputer()
+        }else {
+            //normal
+            randomComputer()
+            for (count in  0 ..4){
+                var randomindex = random.nextInt(5)
+                if (computer_list[randomindex] <= 2){
+                    computer_list[randomindex]=random.nextInt(6) + 1
+                }
+            }
+        }
+
+        for (i in 0..4) {
+            tempcomputerscore += computer_list[i]
+        }
+
+        //second throw
+        if ((tempcomputerscore<(userscore+10))){
+            var gap = userscore - tempcomputerscore
+
+            if (gap > 20){
+                //high
+                //checking high values
+                for (count in  0 ..4){
+                    var randomindex = random.nextInt(5) + 1
+                    if (computer_list[randomindex] <= 3){
+                        computer_list[randomindex]=random.nextInt(6) + 1
+                    }
+                }
+            }else if(gap < 20){
+                randomComputer()
+                randomComputer()
+            }else {
+                //normal
+                //normal
+                randomComputer()
+                for (count in  0 ..4){
+                    var randomindex = random.nextInt(5) + 1
+                    if (computer_list[randomindex] <= 2){
+                        computer_list[randomindex]=random.nextInt(6) + 1
+                    }
+                }
+            }
         }
     }
 

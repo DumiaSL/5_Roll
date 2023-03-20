@@ -5,6 +5,7 @@
     android:layout_width="220dp"
     android:layout_height="160dp"
     android:layout_gravity="center"
+    android:background="@drawable/aboutbackground"
     tools:context=".ResultScreen">
 
     <TextView

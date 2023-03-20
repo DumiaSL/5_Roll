@@ -5,6 +5,7 @@
     android:layout_width="340dp"
     android:layout_gravity="center"
     android:layout_height="620dp"
+    android:background="@drawable/aboutbackground"
     tools:context=".PopupProfile">
 
     <ImageView

@@ -3,10 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="450dp"
+    android:layout_height="550dp"
     android:layout_gravity="center"
-    android:background="#E5D1FA"
+    android:background="@drawable/splash"
     tools:context=".Game_Inputs_rules">
+
+    <Switch
+        android:id="@+id/hardswich"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47dp"
+        android:text="Computer Strategy "
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/target_field" />
 
     <TextView
         android:id="@+id/textView2"
@@ -14,11 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:text="Game Settings"
-        android:textColor="#0B21EA"
+        android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +45,7 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -39,23 +53,24 @@
         android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="49dp"
+        android:backgroundTint="#09620D"
         android:text="Start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/target_field" />
+        app:layout_constraintTop_toBottomOf="@+id/hardswich" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
         android:text="User Name"
         android:textColor="#0B0A0A"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/check" />
 
@@ -63,12 +78,13 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="22dp"
         android:text="Winner Target"
         android:textColor="#0B0A0A"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_field" />
 
@@ -76,7 +92,7 @@
         android:id="@+id/target_field"
         android:layout_width="214dp"
         android:layout_height="43dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:inputType="number"
         android:textAlignment="center"
@@ -89,7 +105,7 @@
         android:id="@+id/check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="12dp"
         android:text="Must Filed !"
         android:textColor="#E60707"
         android:textSize="14sp"

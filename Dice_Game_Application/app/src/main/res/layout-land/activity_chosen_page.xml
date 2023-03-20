@@ -2,41 +2,39 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="500dp"
-    android:layout_height="385dp"
-    android:layout_gravity="center"
-    android:background="@drawable/background3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/chooselandscape"
     android:orientation="vertical"
     tools:context=".ChosenPage">
 
     <Button
         android:id="@+id/newgame"
         android:layout_width="262dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="272dp"
-        android:backgroundTint="@color/black"
+        android:layout_height="64dp"
+        android:layout_marginTop="140dp"
+        android:backgroundTint="#09620D"
         android:text="New Game"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/about"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/black"
+        android:layout_width="121dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#09620D"
         android:text="About"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newgame"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/newgame" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
