@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.WindowManager
-import android.widget.Button
 import android.widget.ProgressBar
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +37,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, 4500)
+    }
+
+    override fun onPause() {
+        super.onPause()
 
     }
 }

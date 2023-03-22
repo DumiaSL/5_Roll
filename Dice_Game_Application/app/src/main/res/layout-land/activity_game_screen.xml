@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="111dp"
+        android:backgroundTint="#09620D"
         android:text="Score"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toStartOf="@+id/computer_score"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,6 +26,8 @@
         android:layout_marginStart="83dp"
         android:layout_marginTop="30dp"
         android:text="Throw"
+        android:backgroundTint="#09620D"
+        app:cornerRadius="100dp"
         app:layout_constraintStart_toEndOf="@+id/targetscore"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

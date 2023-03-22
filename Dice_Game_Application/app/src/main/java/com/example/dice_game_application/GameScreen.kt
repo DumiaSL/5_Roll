@@ -4,7 +4,10 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -27,7 +30,8 @@ class GameScreen : AppCompatActivity() {
     var computerscore=0
     var userscore=0
     var rounds=0
-    var win_mark=101
+    var targetMark=101
+    var user_name = ""
     var level=false
     var computerWins=0
     var userWins=0
@@ -47,16 +51,28 @@ class GameScreen : AppCompatActivity() {
     lateinit var throwButton: Button
     lateinit var score: Button
 
+    lateinit var diceselecteffect : MediaPlayer
+    lateinit var gamewinsound : MediaPlayer
+    lateinit var gamelostsound : MediaPlayer
+    lateinit var buttloneffect : MediaPlayer
+    lateinit var dicerolleffect : MediaPlayer
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_screen)
+        buttloneffect = MediaPlayer.create(this, R.raw.buttoneffect)
+        dicerolleffect = MediaPlayer.create(this, R.raw.dicerolleffect)
+        diceselecteffect = MediaPlayer.create(this, R.raw.diceselect)
+        gamewinsound = MediaPlayer.create(this, R.raw.gamewinsound)
+        gamelostsound = MediaPlayer.create(this, R.raw.losesoundeffects)
+
 
         mydialog= Dialog(this)
 
         //
-        win_mark=intent.getIntExtra("win_mark",101)
-        var user_name= intent.getStringExtra("user_name")
+        targetMark=intent.getIntExtra("win_mark",101)
+        user_name= intent.getStringExtra("user_name").toString()
         computerWins=intent.getIntExtra("ComputerWins",0)
         userWins=intent.getIntExtra("UserWins",0)
         level=intent.getBooleanExtra("level",false)
@@ -102,7 +118,7 @@ class GameScreen : AppCompatActivity() {
         }
 
         //initialize game screen
-        target_text.setText(win_mark.toString())
+        target_text.setText(targetMark.toString())
         round_text.setText(rounds.toString())
         user_text.setText(user_name)
         winUser_text.setText("H:"+userWins.toString())
@@ -120,6 +136,7 @@ class GameScreen : AppCompatActivity() {
 
         //when press the Score button
         score.setOnClickListener{
+            buttloneffect.start()
             //random strategy twice for computer
             if (!level){
                 randomComputer()
@@ -160,13 +177,14 @@ class GameScreen : AppCompatActivity() {
 
         //when press the Throw/Rethrow/Rethrow Again button
         throwButton.setOnClickListener {
+            buttloneffect.start()
+            dicerolleffect.start()
+
             if (!isTie){
                 score.isVisible=true
             }
 
             //Generating computer dice numbers
-
-
             if (throwRound==0){
                 //Increment rounds
                 rounds++
@@ -196,12 +214,9 @@ class GameScreen : AppCompatActivity() {
                 if (!level){
                     randomComputer()
                     randomComputer()
-                    println("Ezy")
                 }else{
                     hardComputerPlayerStrategy()
                 }
-
-                println(computer_list)
 
                 throwButton.setText("Throw")
                 throwRound=0
@@ -342,7 +357,6 @@ class GameScreen : AppCompatActivity() {
             //user image set touch false
             imageClickable(true)
         }
-        println(userRemoveList)
 
         for (imageIndex in 0 until 5){
             if (userRemoveList[imageIndex]==false){
@@ -409,6 +423,7 @@ class GameScreen : AppCompatActivity() {
     private fun selecImage(isImageSelect: Boolean, userImage: ImageView): Boolean {
         if (isImageSelect==false){
             userImage.setBackgroundColor(getColor(R.color.purple_500))
+            diceselecteffect.start()
             return true
         }else{
             userImage.setBackgroundColor(Color.TRANSPARENT)
@@ -428,8 +443,10 @@ class GameScreen : AppCompatActivity() {
             val intent = Intent(this, ChosenPage::class.java)
             intent.putExtra("ComputerWins",computerWins)
             intent.putExtra("UserWins",userWins)
-            finish()
+            intent.putExtra("user_name",user_name)
+            intent.putExtra("targetMark",targetMark)
             startActivity(intent)
+            finish()
         }
         mydialog.show()
     }
@@ -464,14 +481,16 @@ class GameScreen : AppCompatActivity() {
 
     //game winning condition with relevant rules
     private fun winningCondition() {
-        if (userscore >= win_mark || computerscore >= win_mark) {
+        if (userscore >= targetMark || computerscore >= targetMark) {
             if (userscore > computerscore) {
                 isWinPopUp="win"
                 userWins++
+                gamewinsound.start()
                 mydialog?.let { result_part(it, "You Win!", Color.GREEN) }
             } else if (userscore < computerscore) {
                 isWinPopUp="lost"
                 computerWins++
+                gamelostsound.start()
                 mydialog?.let { result_part(it, "You Lost", Color.RED) }
             } else {
                 isTie = true
@@ -488,7 +507,18 @@ class GameScreen : AppCompatActivity() {
             val intent = Intent(this, ChosenPage::class.java)
             intent.putExtra("ComputerWins",computerWins)
             intent.putExtra("UserWins",userWins)
+            intent.putExtra("user_name",user_name)
+            intent.putExtra("targetMark",targetMark)
+            buttloneffect.release()
+            dicerolleffect.release()
+            diceselecteffect.release()
+            gamewinsound.release()
+            gamelostsound.release()
             startActivity(intent)
+            finish()
+        }
+        builder.setNeutralButton("Yes, Game Quit") { dialog, which ->
+            stopService(Intent(this, BackgroundSoundService::class.java))
             finish()
         }
         builder.setNegativeButton("No") { dialog, which ->
@@ -546,11 +576,15 @@ class GameScreen : AppCompatActivity() {
         }
 
         whenRotateSet()
-
+    }
+    override fun onResume() {
+        super.onResume()
+        startService(Intent(this, BackgroundSoundService::class.java))
     }
 
     override fun onPause() {
         super.onPause()
+        stopService(Intent(this, BackgroundSoundService::class.java))
         if (mydialog != null && mydialog!!.isShowing()) {
             mydialog!!.dismiss()
         }

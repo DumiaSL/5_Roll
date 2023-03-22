@@ -12,13 +12,14 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="163dp"
         android:text="Game Settings"
         android:textColor="#09620D"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,12 +39,14 @@
         android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="13dp"
         android:backgroundTint="#09620D"
         android:text="Start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/check" />
+        android:soundEffectsEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/hardswich" />
 
     <TextView
         android:id="@+id/textView10"
@@ -62,13 +65,15 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
+        android:layout_marginStart="189dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="60dp"
         android:text="Winner Target"
         android:textColor="#0B0A0A"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
@@ -87,26 +92,30 @@
         android:id="@+id/check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginStart="238dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="239dp"
         android:text="Must Filed !"
         android:textColor="#E60707"
         android:textSize="14sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Switch
         android:id="@+id/hardswich"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="72dp"
-        android:text="Computer Strategy "
+        android:layout_marginTop="15dp"
+        android:text="Computer Strategy Hard  "
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/check" />
+        app:layout_constraintTop_toBottomOf="@+id/name_field" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
