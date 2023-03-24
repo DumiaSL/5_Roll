@@ -158,7 +158,6 @@ class ChosenPage : AppCompatActivity() {
         isAboutPopup = savedInstanceState.getBoolean("isAboutPopup")
         level = savedInstanceState.getBoolean("level")
         targetMark = savedInstanceState.getString("targetMark").toString()
-        level = savedInstanceState.getBoolean("level")
         userName = savedInstanceState.getString("userName")
         ischeckflagvisible = savedInstanceState.getBoolean("ischeckflagvisible")
 
@@ -212,7 +211,6 @@ class ChosenPage : AppCompatActivity() {
         }
 
         if (isAboutPopup){
-            isAboutPopup=true
             mydialog2!!.setContentView(R.layout.activity_popup_profile)
             mydialog2!!.setOnCancelListener{
                 isAboutPopup=false
