@@ -569,7 +569,7 @@ class GameScreen : AppCompatActivity() {
 
         for (index in 0..4){
             if (tempRemoveList[index]==0){
-                userRemoveList[0]=false
+                userRemoveList[index]=false
             }else{
                 userRemoveList[index]=true
             }
