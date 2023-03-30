@@ -11,12 +11,20 @@ In case of a tie, where both players achieve the same score in the same number o
 
 Overall, this dice game offers players the opportunity to test their luck and strategy skills in a fun and challenging way against a computer opponent.
 
-Used = Kotlin , Sndroid Studio
+Used = Kotlin , Android Studio
 
 
 ![splash screen](https://user-images.githubusercontent.com/90560618/226895272-54ad7df1-4089-4aae-8f3c-d9acdc7844c2.jpg)
+
 ![IMG-20230322-WA0014](https://user-images.githubusercontent.com/90560618/226895705-97443e6e-f5ea-4ad0-ad82-d387a62d210c.jpg)
+
 ![IMG-20230322-WA0012](https://user-images.githubusercontent.com/90560618/226895750-cfc1cf3e-27ee-4c73-967a-d7d3085019e2.jpg)
+
 ![IMG-20230322-WA0016](https://user-images.githubusercontent.com/90560618/226895810-5109e6f3-b4f7-4b61-935e-34101a8c5956.jpg)
+
 ![IMG-20230322-WA0017](https://user-images.githubusercontent.com/90560618/226895877-5579b5d7-8052-4188-952d-5b8fedff1cf3.jpg)
+
 ![IMG-20230322-WA0015](https://user-images.githubusercontent.com/90560618/226896035-e243455a-f4b2-45c4-8587-6a2a5e527fb2.jpg)
+
+![WhatsApp Image 2023-03-30 at 11 05 47](https://user-images.githubusercontent.com/90560618/228739431-29f7a9bb-2356-499d-8e2c-51b60d0faa0c.jpg)
+
